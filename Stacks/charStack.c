@@ -95,8 +95,44 @@ int isPalindrome(char *text){
 	return isPalindrome;
 }
 
+int isBalanced(char *text){
+	char *c;
+	struct stack *s = malloc(sizeof(*s));
+	init(s);
+	
+	c = text;
+	int isBalanced = 1;
+	
+	while (*c != '\0' && isBalanced == 1){
+		if (*c == '{' || *c == '(' || *c == '['){
+			push(*c,s);
+		}else if (*c == '}' || *c == ')' || *c == ']'){
+			if (isEmpty(s) == 1){
+				isBalanced = 0;
+			}else if (*c == '}' && peek(s) != '{'){
+				isBalanced = 0;
+			}else if (*c == ')' && peek(s) != '('){
+				isBalanced = 0;
+			}else if (*c == ']' && peek(s) != '['){
+				isBalanced = 0;
+			}else{
+				pop(s);
+			}
+		}
+		c++;
+	}
+	
+	if (isEmpty(s) == 0){
+		isBalanced = 0;
+	}
+	
+	return isBalanced;
+	
+}
+
 int main()
 {
+	/*
 	char *text = "Hello";
 	printf("Is a palindrome:%d\n",isPalindrome(text));
 	text = "racecar";
@@ -107,5 +143,23 @@ int main()
 	printf("Is a palindrome:%d\n",isPalindrome(text));
 	text = "mom";
 	printf("Is a palindrome:%d\n",isPalindrome(text));
+	*/
+	
+	char *text = "(a)";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "(a))";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "((a)";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "((texthere))";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "([a]";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "((a]";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "([a)]";
+	printf("Is Balanced: %d\n",isBalanced(text));
+	text = "([{allthebrackets}])";
+	printf("Is Balanced: %d\n",isBalanced(text));
 }
 
