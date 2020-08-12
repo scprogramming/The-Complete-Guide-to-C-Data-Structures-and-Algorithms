@@ -75,8 +75,7 @@ void print(struct stack *stack){
 int main()
 {
 	int n;
-	struct stack *s;
-	char *text = "Test\0";
+	struct stack *s = malloc(sizeof(*s));
 
 	init(s);
 
@@ -92,7 +91,5 @@ int main()
 	printf("Pop:%d\n",pop(s));
 	print(s);
 	printf("IsEmpty:%d\n",isEmpty(s));
-
-	isPalindrome(text);
 }
 
