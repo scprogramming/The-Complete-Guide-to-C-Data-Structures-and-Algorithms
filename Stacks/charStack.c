@@ -72,24 +72,40 @@ void print(struct stack *stack){
 	}
 }
 
+int isPalindrome(char *text){
+	char *c;
+	
+	struct stack *s = malloc(sizeof(*s));
+	init(s);
+	
+	for (c = text; *c != '\0'; c++){
+		push(*c,s);
+	}
+	
+	c = text;
+	int isPalindrome = 1;
+	
+	while (*c != '\0' && isPalindrome == 1){
+		if (*c != pop(s)){
+			isPalindrome = 0;
+		}
+		c++;
+	}
+	
+	return isPalindrome;
+}
+
 int main()
 {
-	char n;
-	struct stack *s = malloc(sizeof(*s));
-
-	init(s);
-
-	n = 'A';
-	push(n,s);
-	n = 'B';
-	push(n,s);
-	n = 'C';
-	push(n,s);
-
-	printf("Peek:%c\n",peek(s));
-	print(s);
-	printf("Pop:%c\n",pop(s));
-	print(s);
-	printf("IsEmpty:%d\n",isEmpty(s));
+	char *text = "Hello";
+	printf("Is a palindrome:%d\n",isPalindrome(text));
+	text = "racecar";
+	printf("Is a palindrome:%d\n",isPalindrome(text));
+	text = "racbecar";
+	printf("Is a palindrome:%d\n",isPalindrome(text));
+	text = "racebcar";
+	printf("Is a palindrome:%d\n",isPalindrome(text));
+	text = "mom";
+	printf("Is a palindrome:%d\n",isPalindrome(text));
 }
 
