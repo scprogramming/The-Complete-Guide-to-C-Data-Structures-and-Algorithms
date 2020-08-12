@@ -71,28 +71,25 @@ void print(struct stack *stack){
 		temp = temp->next;
 	}
 }
+int isPalindrome(char *text){
+	char *t;
+	int charInt;
+	struct stack *s;
+	init(s);
+
+	for (t=text; *t!= '\0';t++){
+		charInt = *t - '0';
+		printf("%d\n",charInt);
+	}
+	return 0;
+}
+
 
 int main()
 {
-	int n;
-	struct stack *s;
+	char n;
 	char *text = "Test\0";
-
-	init(s);
-
-	n = 5;
-	push(n,s);
-	n = 6;
-	push(n,s);
-	n = 7;
-	push(n,s);
-
-	printf("Peek:%d\n",peek(s));
-	print(s);
-	printf("Pop:%d\n",pop(s));
-	print(s);
-	printf("IsEmpty:%d\n",isEmpty(s));
-
 	isPalindrome(text);
 }
+
 
