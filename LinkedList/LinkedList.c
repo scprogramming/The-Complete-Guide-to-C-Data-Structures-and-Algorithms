@@ -99,6 +99,22 @@ int removeRear(struct LinkedList *linkedList){
 	return data;
 }
 
+int contains(int item, struct LinkedList *linkedList){
+	struct node *holder;
+	int found = 0;
+	
+	holder = linkedList->front;
+	
+	while (holder != NULL && found == 0){
+		if (holder->data == item){
+			found = 1;
+		}
+		holder = holder->next;
+	}
+	
+	return found;
+}
+
 void print(struct LinkedList *linkedList){
 	struct node *temp;
 	temp = linkedList->front;
@@ -124,6 +140,8 @@ int main(){
 	insertRear(n,l);
 	
 	print(l);
+	
+	printf("Found: %d\n",contains(10,l));
 }
 
 
